@@ -11,14 +11,6 @@ var GameLayer = cc.LayerColor.extend({
         this.player.scheduleUpdate();
         return true;
     },
-    onKeyDown: function( keyCode, event ) {
-	   if ( keyCode == cc.KEY.space ) {
-           this.ship.switchDirection();
-	   }
-    },
-    onKeyUp: function( keyCode, event ) {
-	   console.log( 'Up: ' + keyCode.toString() );
-    },
     addKeyboardHandlers: function() {
         var self = this;
         cc.eventManager.addListener({
@@ -30,7 +22,13 @@ var GameLayer = cc.LayerColor.extend({
                 self.onKeyUp( keyCode, event );
             }
         }, this);
+    },
+    onKeyDown: function( keyCode, event ) {
+        this.player.jump();
+    },
+    onKeyUp: function( keyCode, event ) {
     }
+    
 });
 
 var StartScene = cc.Scene.extend({
