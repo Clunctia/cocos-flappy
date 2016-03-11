@@ -24,7 +24,14 @@ var GameLayer = cc.LayerColor.extend({
         }, this);
     },
     onKeyDown: function( keyCode, event ) {
-        this.player.jump();
+        if ( this.state == GameLayer.STATES.FRONT ) {
+            this.state = GameLayer.STATES.STARTED;
+            // <--- some code to tell the player to start falling (TO BE ADDED LATER)
+            this.player.jump();
+            this.player.start();
+        } else if ( this.state == GameLayer.STATES.STARTED ) {
+            this.player.jump();
+        }
     },
     onKeyUp: function( keyCode, event ) {
     }
@@ -43,3 +50,7 @@ var StartScene = cc.Scene.extend({
     }
 });
 
+GameLayer.STATES = {
+    FRONT: 1,
+    STARTED: 2
+};
